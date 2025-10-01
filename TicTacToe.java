@@ -1,49 +1,36 @@
 import java.util.Scanner;
 
 public class TicTacToe {
+     
 
-    // Create keyboard object of scanner class to read user input
-    static Scanner keyboard = new Scanner(System.in);
+    private static final char PLAYER_X = 'X';
+    private static final char PLAYER_O = 'O';
+    private static final char EMPTY = ' ';
 
-    // integer variable to intake users choice of game
-    static public int choice;
+    public static char[][] board = {{' ',' ',' '},
+                      {' ',' ',' '},
+                      {' ',' ',' '}
+                     };
 
-    // Create an aesthetic starting screen because I'm lost on the logic side 
-    public static void startingScreen() {
-        System.out.println("--------------------------------------");
-        System.out.println("|                                    |");
-        System.out.println("|            Tik Tak Toe !           |");
-        System.out.println("|                                    |");
-        System.out.println("|             X | O | X              |");
-        System.out.println("|            ---|---|---             |");
-        System.out.println("|             O | X | O              |"); 
-        System.out.println("|            ---|---|---             |");
-        System.out.println("|             X | O | X              |");
-        System.out.println("|                                    |");
-        System.out.println("|       [1] Play against a friend    |");
-        System.out.println("|       [2] Play against a bot       |");
-        System.out.println("|       [3] Exit                     |");
-        System.out.println("|                                    |"); 
-        System.out.print("|     Enter your choice (1-3): ");
-        choice = keyboard.nextInt();
-        System.out.println("    |");
-        System.out.println("|                                    |");
-        System.out.println("--------------------------------------");
+    public static void printBoard(char[][] board) { 
+        for(int i = 0; i < board.length; i++) { 
+            for(int j = 0; j < board[i].length; j++) {
+                System.out.print(" "+ board[i][j] + " ");
+                if(j < 2) { 
+                    System.out.print("|");
+                }
+            }
+            System.out.println();
+            if(i < 2) { 
+                System.out.println("-----------");
+            }
+        }
     }
+     
+    public static void main(String[] args)  {
 
-    // Create the tic tac toe interface
-    public static void gameInterface() {
-        System.out.println("             X | O | X              ");
-        System.out.println("            ---|---|---             ");
-        System.out.println("             O | X | O              "); 
-        System.out.println("            ---|---|---             ");
-        System.out.println("             X | O | X              ");
+        Scanner keyboard = new Scanner(System.in);
+        printBoard(board); 
     }
+}
 
-    // Trying to figure out the logic 
-
-   public static void main(String[] args) { 
-    System.out.println("Hello World");
-    startingScreen();
-   } 
-}   
