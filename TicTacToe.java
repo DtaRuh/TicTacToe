@@ -76,7 +76,6 @@ public class TicTacToe {
      * @return int chosen by player i.e. 5
      */
     public static int getPlayerMove(char currentPlayer) { 
-        printDisplayBoard();
         System.out.print("Player " + currentPlayer + ", choose position (1-9): ");
         return keyboard.nextInt();
     }
@@ -146,29 +145,48 @@ public class TicTacToe {
         return false;
     }
 
+    /*
+     * Add a method to place moves
+     * @param int choice, char player
+     */
+    public static void placeMove(int choice, char player) {
+        int row = (choice - 1) / 3;
+        int col = (choice - 1) % 3;
+        board[row][col] = player; // places either 'X', 'O' or ' ' into board position
+    }
+
+
+
 
     
-     
+
+    // condition ? valueIfTrue : valueIfFalse  (? is the ternary operator) 
+    // in our case (choosePlayer() == 1) ? PLAYER_X : PLAYER_O 
     public static void main(String[] args)  {
 
-        resetBoard(board);
         printDisplayBoard();
-        
-        if(choosePlayer() == 1) { 
-            getPlayerMove(PLAYER_X);
-        } 
-        else { 
-            getPlayerMove(PLAYER_O);
+        resetBoard(board);
+        char currentPlayer = (choosePlayer() == 1) ? PLAYER_X : PLAYER_O; // check who goes first
+        boolean gameWon = false;
+
+        while(!gameWon) { 
+            int move = getPlayerMove(currentPlayer);
+            
+            if(checkChoice(move)) { 
+                placeMove(move, currentPlayer);
+                printBoard(board);
+                gameWon = checkWinner(board);
+
+                if(!gameWon) { 
+                    // Utilise the ternary operator again to switch players
+                    currentPlayer = (currentPlayer == PLAYER_X) ? PLAYER_O : PLAYER_X;
+                }
+            } else { 
+                System.out.println("Invalid move! Please try again."); // Doesn't switch players on invalid move
+            }
         }
 
-        do  {
-            checkChoice(getPlayerMove(PLAYER_X)); 
-            checkWinner();
-            printBoard(board);
-
-        }
-        while (checkWinner(board) != true);
-
+        System.out.println("Player " + currentPlayer + " wins!");
     }
 }
 
