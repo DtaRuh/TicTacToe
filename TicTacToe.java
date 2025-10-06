@@ -1,9 +1,7 @@
 import java.util.Scanner;
 import java.util.Random;
 
-
 public class TicTacToe {
-
 
     // Initialising Scanner and Random objects for further methods
     public static final Scanner keyboard = new Scanner(System.in);
@@ -13,7 +11,6 @@ public class TicTacToe {
     private static final char PLAYER_X = 'X';
     private static final char PLAYER_O = 'O';
     private static final char EMPTY = ' ';
-
 
     // initialise the our tic tac toe board
     public static char[][] board = new char[3][3];
@@ -41,7 +38,6 @@ public class TicTacToe {
                       
     /* @param 2D char array
        @return void (prints the char array) */
-
     public static void printBoard(char[][] board) { 
         for(int i = 0; i < board.length; i++) { 
             for(int j = 0; j < board[i].length; j++) {
@@ -154,14 +150,28 @@ public class TicTacToe {
         int col = (choice - 1) % 3;
         board[row][col] = player; // places either 'X', 'O' or ' ' into board position
     }
+    /*
+     * add a method to check for a tie
+     * @param char[][] board
+     * @return boolean true if tie, false if game still undecided
+     */
+    public static boolean checkTie(char[][] board) {
+        // need to check that at least 1 index in board[][] equals EMPTY
+        int checkPointer = 0;
+        for(int i = 0; i < board.length; i++) { 
+            for(int j = 0; j < board[i].length; j++) { 
+                if(board[i][j] == EMPTY)
+                checkPointer = 1;
+            }
+        }
+        if(checkPointer == 1) { 
+            return false;
+        }
+        else { 
+            return true;
+        }
+     }
 
-
-
-
-    
-
-    // condition ? valueIfTrue : valueIfFalse  (? is the ternary operator) 
-    // in our case (choosePlayer() == 1) ? PLAYER_X : PLAYER_O 
     public static void main(String[] args)  {
 
         printDisplayBoard();
@@ -170,6 +180,10 @@ public class TicTacToe {
         boolean gameWon = false;
 
         while(!gameWon) { 
+            if(checkTie(board) == true) { 
+                System.out.println("Tie Game!");
+                return;
+            }
             int move = getPlayerMove(currentPlayer);
             
             if(checkChoice(move)) { 
@@ -187,6 +201,6 @@ public class TicTacToe {
         }
 
         System.out.println("Player " + currentPlayer + " wins!");
+        keyboard.close(); // close my scanner object
     }
 }
-
