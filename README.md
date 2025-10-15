@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Tic-Tac-Toe
 A basic command-line Tic-Tac-Toe game built in Java as part of my software development studies.
 
@@ -47,4 +46,3 @@ java TicTacToe
 ```bash
 cd OOP-Version
 javac *.java && java Main
->>>>>>> 144b394 (Refactored the program to align with Object Orientated Programming practices to fortify my learning! Introduced two seperate folders for the Procedural version and the OOP version.)
