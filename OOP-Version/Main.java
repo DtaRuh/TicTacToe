@@ -20,7 +20,6 @@ public class Main {
         do { 
 
             // Display board layout and start a new game
-            board.printDisplayBoard();
             Game game = new Game(board, playerX, playerO);
             game.startGame();
 
